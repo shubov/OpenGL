@@ -69,7 +69,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Dev\Computer Graphics\Libraries\freetype\include;C:\Dev\Computer Graphics\Libraries\FreeImage;C:\Dev\Computer Graphics\Libraries\glew-2.1.0\include;C:\Dev\Computer Graphics\Libraries\glm;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Dev\Computer Graphics\Libraries\freetype\win32;C:\Dev\Computer Graphics\Libraries\FreeImage;C:\Dev\Computer Graphics\Libraries\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -111,6 +114,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="data\shaders\blaze_gen_common.geom" />
+    <None Include="data\shaders\blaze_part_gen_box.geom" />
+    <None Include="data\shaders\dirLight.frag" />
+    <None Include="data\shaders\font2D.frag" />
+    <None Include="data\shaders\main_shader.frag" />
+    <None Include="data\shaders\main_shader.vert" />
+    <None Include="data\shaders\normal_displayer.frag" />
+    <None Include="data\shaders\normal_displayer.geom" />
+    <None Include="data\shaders\normal_displayer.vert" />
+    <None Include="data\shaders\ortho2D.frag" />
+    <None Include="data\shaders\ortho2D.vert" />
+    <None Include="data\shaders\particles_render.frag" />
+    <None Include="data\shaders\particles_render.geom" />
+    <None Include="data\shaders\particles_render.vert" />
+    <None Include="data\shaders\particles_update.frag" />
+    <None Include="data\shaders\particles_update.geom" />
+    <None Include="data\shaders\particles_update.vert" />
+    <None Include="data\shaders\terrain.frag" />
+    <None Include="data\shaders\terrain.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="assimp_model.cpp" />
+    <ClCompile Include="dirLight.cpp" />
+    <ClCompile Include="flyingCamera.cpp" />
+    <ClCompile Include="freeTypeFont.cpp" />
+    <ClCompile Include="heightmap.cpp" />
+    <ClCompile Include="material.cpp" />
+    <ClCompile Include="openGLControl.cpp" />
+    <ClCompile Include="particle_system_tf.cpp" />
+    <ClCompile Include="renderScene.cpp" />
+    <ClCompile Include="shaders.cpp" />
+    <ClCompile Include="skybox.cpp" />
+    <ClCompile Include="static_geometry.cpp" />
+    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="vertexBufferObject.cpp" />
+    <ClCompile Include="win_OpenGLApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="assimp_model.h" />
+    <ClInclude Include="common_header.h" />
+    <ClInclude Include="dirLight.h" />
+    <ClInclude Include="flyingCamera.h" />
+    <ClInclude Include="freeTypeFont.h" />
+    <ClInclude Include="heightmap.h" />
+    <ClInclude Include="material.h" />
+    <ClInclude Include="openGLControl.h" />
+    <ClInclude Include="particle_system_tf.h" />
+    <ClInclude Include="shaders.h" />
+    <ClInclude Include="skybox.h" />
+    <ClInclude Include="static_geometry.h" />
+    <ClInclude Include="texture.h" />
+    <ClInclude Include="vertexBufferObject.h" />
+    <ClInclude Include="win_OpenGLApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
