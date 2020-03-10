@@ -134,7 +134,7 @@ void CFlyingCamera::Update()
 	vStrafe *= fSpeed;
 
 	int iMove = 0;
-	glm::vec3 vMoveBy;
+	glm::vec3 vMoveBy(0.0f);
 	// Get vector of move
 	if(Keys::Key(iForw))vMoveBy += vMove*appMain.sof(1.0f);
 	if(Keys::Key(iBack))vMoveBy -= vMove*appMain.sof(1.0f);

@@ -67,13 +67,12 @@ bool CAssimpModel::LoadModelFromFile(char* sFilePath)
 	
 	int iTotalVertices = 0;
 
-	FOR(i, scene->mNumMeshes)
-	{
+	for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[i];
 		int iMeshFaces = mesh->mNumFaces;
 		iMaterialIndices.push_back(mesh->mMaterialIndex);
 		int iSizeBefore = vboModelData.GetCurrentSize();
-		iMeshStartIndices.push_back(iSizeBefore/iVertexTotalSize);
+		iMeshStartIndices.push_back(iSizeBefore / iVertexTotalSize);
 		FOR(j, iMeshFaces)
 		{
 			const aiFace& face = mesh->mFaces[j];
@@ -89,7 +88,7 @@ bool CAssimpModel::LoadModelFromFile(char* sFilePath)
 		}
 		int iMeshVertices = mesh->mNumVertices;
 		iTotalVertices += iMeshVertices;
-		iMeshSizes.push_back((vboModelData.GetCurrentSize()-iSizeBefore)/iVertexTotalSize);
+		iMeshSizes.push_back((vboModelData.GetCurrentSize() - iSizeBefore) / iVertexTotalSize);
 	}
 	iNumMaterials = scene->mNumMaterials;
 

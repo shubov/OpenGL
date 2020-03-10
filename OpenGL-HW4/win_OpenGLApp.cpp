@@ -158,7 +158,7 @@ Result:	Creates main application window.
 
 bool COpenGLWinApp::CreateAppWindow(string sTitle)
 {
-	if(MessageBox(NULL, "Would you like to run in fullscreen?", "Fullscreen", MB_ICONQUESTION | MB_YESNO) == IDYES)
+	if (false)
 	{
 		DEVMODE dmSettings = {0};
 		EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &dmSettings); // Get current display settings
@@ -313,6 +313,7 @@ Params:	whatever
 Result:	Application entry point.
 
 /*---------------------------------------------*/
+int main() { return WinMain(GetModuleHandle(NULL), NULL, GetCommandLine(), SW_SHOW); }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR sCmdLine, int iShow)
 {

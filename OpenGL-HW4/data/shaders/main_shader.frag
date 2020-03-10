@@ -18,7 +18,7 @@ uniform Material matActive;
 
 void main()
 {
-   vec4 vTexColor = texture2D(gSampler, vTexCoord);
+   vec4 vTexColor = texture(gSampler, vTexCoord);
    vec4 vMixedColor = vTexColor*vColor;
    
    vec3 vNormalized = normalize(vNormal);

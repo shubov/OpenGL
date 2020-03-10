@@ -147,7 +147,7 @@ bool COpenGLControl::InitOpenGL(HINSTANCE hInstance, HWND* a_hWnd, int iMajorVer
 		{
 			WGL_CONTEXT_MAJOR_VERSION_ARB, iMajorVersion,
 			WGL_CONTEXT_MINOR_VERSION_ARB, iMinorVersion,
-			WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+			WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
 			0 // End of attributes list
 		};
 
