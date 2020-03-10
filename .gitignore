@@ -1,0 +1,9 @@
+/.vs
+/Debug
+/OpenGL-HW1/Debug
+/OpenGL-HW2/Debug
+/OpenGL-HW3/Debug
+/OpenGL-HW4/Debug
+/OpenGL-HW5/Debug
+*.exe
+*.obj
