@@ -1,8 +1,6 @@
 #include "common_header.h"
-
 #include "win_OpenGLApp.h"
 #include "flyingCamera.h"
-
 #include <glm/gtx/rotate_vector.hpp>
 
 const float PI = float(atan(1.0)*4.0);
@@ -120,9 +118,9 @@ Result:	Performs updates of camera - moving and
 		rotating.
 /*---------------------------------------------*/
 
-void CFlyingCamera::Update()
+void CFlyingCamera::Update(bool controlMode)
 {
-	RotateWithMouse();
+	if (!controlMode) RotateWithMouse();
 
 	// Get view direction
 	glm::vec3 vMove = vView-vEye;

@@ -13,7 +13,6 @@
 #include "static_geometry.h"
 #include "particle_system_tf.h"
 
-
 CVertexBufferObject vboSceneObjects;
 UINT uiVAOSceneObjects;
 CFreeTypeFont ftFont;
@@ -26,7 +25,7 @@ CMultiLayeredHeightmap hmWorld;
 CParticleSystemTransformFeedback psMainParticleSystem;
 int iTorusFaces;
 bool bDisplayNormals = false; // Do not display normals by default
-
+bool controlMode = false;
 /*-----------------------------------------------
 Name:    InitScene
 
@@ -298,7 +297,7 @@ void RenderScene(LPVOID lpParam)
 	psMainParticleSystem.UpdateParticles(appMain.sof(1.0f));
 	psMainParticleSystem.RenderParticles();
 
-	cCamera.Update();
+	cCamera.Update(controlMode);
 
 	// Print something over scene
 	
@@ -324,9 +323,11 @@ void RenderScene(LPVOID lpParam)
 
 	ftFont.PrintFormatted(20, h-200, 20, "Displaying Normals: %s (Press 'N' to toggle)", bDisplayNormals ? "Yes" : "Nope");
 	if(Keys::Onekey('N'))bDisplayNormals = !bDisplayNormals;
-
+	
+	//toggle mouse rotation
+	if (Keys::Onekey('X'))controlMode = !controlMode;
 	glEnable(GL_DEPTH_TEST);	
-	if(Keys::Onekey(VK_ESCAPE))PostQuitMessage(0);
+	if (Keys::Onekey(VK_ESCAPE))PostQuitMessage(0);
 
 	oglControl->SwapBuffers();
 }

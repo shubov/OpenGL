@@ -158,12 +158,12 @@ Result:	Creates main application window.
 
 bool COpenGLWinApp::CreateAppWindow(string sTitle)
 {
+	DEVMODE dmSettings = { 0 };
+	EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &dmSettings); // Get current display settings
+
 	if (MessageBox(NULL, "Would you like to run in fullscreen?", "Fullscreen", MB_ICONQUESTION | MB_YESNO) == IDYES)
 	//if (false)
 	{
-		DEVMODE dmSettings = {0};
-		EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &dmSettings); // Get current display settings
-
 		hWnd = CreateWindowEx(0, sAppName.c_str(), sTitle.c_str(), WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, // This is the commonly used style for fullscreen
 		0, 0, dmSettings.dmPelsWidth, dmSettings.dmPelsHeight, NULL,
 		NULL, hInstance, NULL);
@@ -171,6 +171,14 @@ bool COpenGLWinApp::CreateAppWindow(string sTitle)
 	else hWnd = CreateWindowEx(0, sAppName.c_str(), sTitle.c_str(), WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
 		0, 0, CW_USEDEFAULT, CW_USEDEFAULT, NULL,
 		NULL, hInstance, NULL);
+
+	int btnSize = 30, OffsetX = 1500, OffsetY = 10, margin = 5;
+	HWND hwndButton1 = CreateWindowW(L"BUTTON", L"OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, OffsetX, OffsetY + (btnSize + margin)*0, btnSize, btnSize, hWnd, NULL, (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE), NULL);
+	HWND hwndButton2 = CreateWindowW(L"BUTTON", L"OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, OffsetX, OffsetY + (btnSize + margin)*1, btnSize, btnSize, hWnd, NULL, (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE), NULL);
+	HWND hwndButton3 = CreateWindowW(L"BUTTON", L"OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, OffsetX, OffsetY + (btnSize + margin)*2, btnSize, btnSize, hWnd, NULL, (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE), NULL);
+	HWND hwndButton4 = CreateWindowW(L"BUTTON", L"OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, OffsetX, OffsetY + (btnSize + margin)*3, btnSize, btnSize, hWnd, NULL, (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE), NULL);
+	HWND hwndButton5 = CreateWindowW(L"BUTTON", L"OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, OffsetX, OffsetY + (btnSize + margin)*4, btnSize, btnSize, hWnd, NULL, (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE), NULL);
+	HWND hwndButton6 = CreateWindowW(L"BUTTON", L"OK", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, OffsetX, OffsetY + (btnSize + margin)*5, btnSize, btnSize, hWnd, NULL, (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE), NULL);
 
 	if(!oglControl.InitOpenGL(hInstance, &hWnd, 3, 3, InitScene, RenderScene, ReleaseScene, &oglControl))return false;
 
