@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>C:\Dev\Computer Graphics\Libraries\glm\glm;C:\Dev\Computer Graphics\Libraries\FreeImage;C:\Dev\Computer Graphics\Libraries\glew-2.1.0\include;C:\Dev\Computer Graphics\Libraries\freetype\include;C:\Dev\Computer Graphics\Libraries\assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Dev\Computer Graphics\Libraries\glew-2.1.0\lib\Release\Win32;C:\Dev\Computer Graphics\Libraries\FreeImage;C:\Dev\Computer Graphics\Libraries\freetype\win32;C:\Dev\Computer Graphics\Libraries\assimp\bin\assimp_debug-dll_win32;C:\Dev\Computer Graphics\Libraries\assimp\lib\assimp_debug-dll_win32;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Dev\Computer Graphics\Libraries\glew-2.1.0\lib\Release\Win32;C:\Dev\Computer Graphics\Libraries\FreeImage;C:\Dev\Computer Graphics\Libraries\freetype;C:\Dev\Computer Graphics\Libraries\assimp;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
