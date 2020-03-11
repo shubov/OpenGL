@@ -96,15 +96,15 @@ void InitScene(LPVOID lpParam)
 
 	psMainParticleSystem.SetGeneratorProperties(
 		glm::vec3(-10.0f, 17.5f, 0.0f), // Where the particles are generated
-		glm::vec3(-5, 0, -5), // Minimal velocity
-		glm::vec3(5, 20, 5), // Maximal velocity
-		glm::vec3(0, -5, 0), // Gravity force applied to particles
-		glm::vec3(0.0f, 0.5f, 1.0f), // Color (light blue)
-		1.5f, // Minimum lifetime in seconds
-		3.0f, // Maximum lifetime in seconds
+		glm::vec3(-1, 20, -1), // Minimal velocity
+		glm::vec3(1, 40, 1), // Maximal velocity
+		glm::vec3(0, -10, 0), // Gravity force applied to particles
+		glm::vec3(0.0f, 0.3f, 1.0f), // Color
+		6.0f, // Minimum lifetime in seconds
+		8.0f, // Maximum lifetime in seconds
 		0.75f, // Rendered size
-		0.02f, // Spawn every 0.05 seconds
-		30); // And spawn 30 particles
+		0.01f, // Spawn every 0.05 seconds
+		2); // And spawn 30 particles
 }
 
 /*-----------------------------------------------
