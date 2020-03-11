@@ -1,48 +1,31 @@
 #include "common_header.h"
-
 #include "win_OpenGLApp.h"
-
 #include "shaders.h"
 #include "texture.h"
 #include "vertexBufferObject.h"
-
 #include "flyingCamera.h"
-
 #include "freeTypeFont.h"
-
 #include "skybox.h"
 #include "dirLight.h"
 #include "material.h"
-
 #include "assimp_model.h"
-
 #include "heightmap.h"
-
 #include "static_geometry.h"
-
 #include "particle_system_tf.h"
 
 
 CVertexBufferObject vboSceneObjects;
 UINT uiVAOSceneObjects;
-
 CFreeTypeFont ftFont;
-
 CSkybox sbMainSkybox;
 CFlyingCamera cCamera;
-
 CDirectionalLight dlSun;
-
 CMaterial matShiny;
 CAssimpModel amModels[3];
-
 CMultiLayeredHeightmap hmWorld;
-
-int iTorusFaces;
-
-bool bDisplayNormals = false; // Do not display normals by default
-
 CParticleSystemTransformFeedback psMainParticleSystem;
+int iTorusFaces;
+bool bDisplayNormals = false; // Do not display normals by default
 
 /*-----------------------------------------------
 Name:    InitScene
@@ -93,7 +76,7 @@ void InitScene(LPVOID lpParam)
 	ftFont.LoadSystemFont("arial.ttf", 32);
 	ftFont.SetShaderProgram(&spFont2D);
 	
-	cCamera = CFlyingCamera(glm::vec3(0.0f, 30.0f, 100.0f), glm::vec3(0.0f, 30.0f, 99.0f), glm::vec3(0.0f, 1.0f, 0.0f), 25.0f, 0.1f);
+	cCamera = CFlyingCamera(glm::vec3(0.0f, 30.0f, 100.0f), glm::vec3(0.0f, 30.0f, 99.0f), glm::vec3(0.0f, 1.0f, 0.0f), 25.0f, 0.001f);
 	cCamera.SetMovingKeys('W', 'S', 'A', 'D');
 
 	sbMainSkybox.LoadSkybox("data\\skyboxes\\bluefreeze\\", "bluefreeze_front.jpg", "bluefreeze_back.jpg", "bluefreeze_right.jpg", "bluefreeze_left.jpg", "bluefreeze_top.jpg", "bluefreeze_top.jpg");
@@ -221,7 +204,7 @@ void RenderScene(LPVOID lpParam)
 		glDrawArrays(GL_TRIANGLES, 0, iTorusFaces*3);
 	}
 
-	fGlobalAngle += appMain.sof(50.0f);
+	fGlobalAngle += appMain.sof(0.5f);
 
 	// Now we're going to render terrain
 
