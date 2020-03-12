@@ -45,7 +45,7 @@ void CameraMove(Camera &camera, float x, float y, float z)
 
 void CameraSetup(GLuint program, const Camera &camera, const mat4 &model)
 {
-	// расчитаем необходимые матрицы
+	// раcсчитаем необходимые матрицы
 	mat4 view           = GLFromEuler(camera.rotation) * GLTranslation(-camera.position);
 	mat4 viewProjection = camera.projection * view;
 	mat3 normal         = transpose(mat3(inverse(model)));

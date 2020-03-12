@@ -29,7 +29,7 @@ static GLuint depthFBO = 0;
 // положение курсора и его смещение с последнего кадра
 static int cursorPos[2] = {0,0}, rotateDelta[2] = {0,0}, moveDelta[2] = {0,0};
 
-static const uint32_t meshCount = 3;
+static const uint32_t meshCount = 8;
 
 static Mesh     meshes[meshCount], quadMesh;
 static Material materials[meshCount], quadMaterial;
@@ -96,6 +96,46 @@ bool GLWindowInit(const GLWindow &window)
 	materials[2].diffuse.set(1.0f, 0.5f, 0.3f, 1.0f);
 	materials[2].specular.set(0.8f, 0.8f, 0.8f, 1.0f);
 	materials[2].shininess = 20.0f;
+
+	// сфера 1
+	MeshCreateSphere(meshes[3], vec3(-15.0f, 3.2f, 8.0f), 2.0f);
+	MaterialDefault(materials[3]);
+	materials[3].texture = colorTexture;
+	materials[3].diffuse.set(0.1f, 0.2f, 1.0f, 1.0f);
+	materials[3].specular.set(0.8f, 0.8f, 0.8f, 1.0f);
+	materials[3].shininess = 20.0f;
+
+	// сфера 2
+	MeshCreateSphere(meshes[4], vec3(-4.0f, 1.2f, 10.0f), 3.0f);
+	MaterialDefault(materials[4]);
+	materials[4].texture = colorTexture;
+	materials[4].diffuse.set(1.0f, 1.0f, 0.3f, 1.0f);
+	materials[4].specular.set(0.8f, 0.8f, 0.8f, 1.0f);
+	materials[4].shininess = 20.0f;
+
+	// сфера 3
+	MeshCreateSphere(meshes[5], vec3(15.0f, 1.2f, 0.0f), 4.0f);
+	MaterialDefault(materials[5]);
+	materials[5].texture = colorTexture;
+	materials[5].diffuse.set(1.0f, 0.3f, 0.3f, 1.0f);
+	materials[5].specular.set(0.8f, 0.8f, 0.8f, 1.0f);
+	materials[5].shininess = 20.0f;
+
+	// тор
+	MeshCreateTorus(meshes[6], vec3(2.0f, 1.2f, -9.0f), 3.0f);
+	MaterialDefault(materials[6]);
+	materials[6].texture = colorTexture;
+	materials[6].diffuse.set(1.0f, 1.0f, 0.3f, 1.0f);
+	materials[6].specular.set(0.8f, 0.8f, 0.8f, 1.0f);
+	materials[6].shininess = 20.0f;
+
+	// куб
+	MeshCreateCube(meshes[7], vec3(-7.0f, 3.2f, 5.0f), 2.0f);
+	MaterialDefault(materials[7]);
+	materials[7].texture = colorTexture;
+	materials[7].diffuse.set(1.0f, 0.0f, 0.3f, 1.0f);
+	materials[7].specular.set(0.8f, 0.8f, 0.8f, 1.0f);
+	materials[7].shininess = 20.0f;
 
 	// настроим полноэкранный прямоугольник
 	MeshCreateQuad(quadMesh, vec3(0.0f, 0.0f, 0.0f), 1.0f);
@@ -275,12 +315,12 @@ void GLWindowInput(const GLWindow &window)
 		//InputShowCursor(window.fullScreen ? false : true);
 	}
 
-	moveDelta[0] = 10 * ((int)InputIsKeyDown('D') - (int)InputIsKeyDown('A'));
-	moveDelta[1] = 10 * ((int)InputIsKeyDown('S') - (int)InputIsKeyDown('W'));
+	moveDelta[0] = 15 * ((int)InputIsKeyDown('D') - (int)InputIsKeyDown('A'));
+	moveDelta[1] = 15 * ((int)InputIsKeyDown('S') - (int)InputIsKeyDown('W'));
 
 	InputGetCursorPos(cursorPos, cursorPos + 1);
-	rotateDelta[0] += cursorPos[0] - xCenter;
-	rotateDelta[1] += cursorPos[1] - yCenter;
+	rotateDelta[0] += 2*(cursorPos[0] - xCenter);
+	rotateDelta[1] += 2*(cursorPos[1] - yCenter);
 	InputSetCursorPos(xCenter, yCenter);
 }
 
