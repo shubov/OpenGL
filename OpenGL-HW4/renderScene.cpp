@@ -1,3 +1,8 @@
+// Mikhail Shubov BSE164
+// Models of objects (tree, tower, Earth, plant) are loaded using Assimp
+// Every parameter of the particles generator can be changed by Q(-) and E(+) buttons
+// To change a particular parameter a Control Mode needs to be set (0-9,Z,X,C,V)
+// Rotation Speed can be changed by buttons
 #include "common_header.h"
 #include "win_OpenGLApp.h"
 #include "shaders.h"

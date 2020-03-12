@@ -1,10 +1,10 @@
-// ����� ������ �������� ���164
+// Mikhail Shubov BSE164
 // OpenGL HW2
-// �����������: ����� (�������� ������ ����� ������ ��������� � �������� ������� ����� �� ����������),
-// ������ � ���������, ������ � ������� ���������� ���������� ���������.
-// �� ������ ����� ���� ������ ���� ������� ���������� ���� � ����� � ������������ ��������������.
-// ����, ��� � ����� ��������� ������ ����� ���.
-// �������� ������� ���� ��� ����.
+// 3 planets rendered as spheres with binded textures.
+// Earth rotates and has two textures flow into each other.
+// Each side of the cube has two textures changing gradually over time.
+// Saturn has a ring which is partly transparent.
+// Skybox is space with stars.
 #include "common_header.h"
 #include "win_OpenGLApp.h"
 #include "shaders.h"

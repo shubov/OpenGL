@@ -1,10 +1,8 @@
-// ����� ������ �������� ���164
-// ��������� �� ��� �������� � ��������� ����� � ����������.
-// ������ ����������� � ������� ������������ ��������� ������������� �����(����/����)
-// ����� ���������� ����������, ���� �����������
-// ��������� ��������� �� ����� ������� ������� ������
-// ��������� ��������� ����� ���������� �������
-// ������������ ����� ���������� �� 0 �� 1 �� �����
+// Mikhail Shubov BSE164
+// Blue and red point lights represented by two spheres with binded textures.
+// One spotlight is attached to the camera, another one is represented by a rotating lantern. 
+// Sunlight is represented by a directional parallel light 
+// Cubes has different alpha from 0 to 1, thus some are transparent
 // Q - toggle Sun
 // E - toggle Spotlight
 // R - toggle Spotlight(camera)
