@@ -20,12 +20,29 @@ CSkybox sbMainSkybox;
 CFlyingCamera cCamera;
 CDirectionalLight dlSun;
 CMaterial matShiny;
-CAssimpModel amModels[3];
+CAssimpModel amModels[6];
 CMultiLayeredHeightmap hmWorld;
 CParticleSystemTransformFeedback psMainParticleSystem;
 int iTorusFaces;
 bool bDisplayNormals = false; // Do not display normals by default
-bool controlMode = false;
+float rotationSpeed = 0.5f;
+
+char controlMode;
+// Particle params
+float minVerticalVelocity = 40.0f;
+float minHorizontalVelocity = -5.0f;
+float maxVerticalVelocity = 80.0f;
+float maxHorizontalVelocity = 5.0f;
+float gravity = -9.8f;
+float Red = 0.8f;
+float Green = 0.6f;
+float Blue = 0.6f;
+float MinLifeTime = 6.0f;
+float MaxLifeTime = 8.0f;
+float RenderedSize = 0.75f;
+float SpawnPeriod = 0.01f;
+int Quantity = 30;
+
 /*-----------------------------------------------
 Name:    InitScene
 
@@ -84,26 +101,18 @@ void InitScene(LPVOID lpParam)
 
 	amModels[0].LoadModelFromFile("data\\models\\house\\house.3ds");
 	amModels[1].LoadModelFromFile("data\\models\\treasure_chest_obj\\treasure_chest.obj");
+	amModels[2].LoadModelFromFile("data\\models\\earth\\earth.3ds");
+	amModels[3].LoadModelFromFile("data\\models\\tree\\tree.3ds");
+	amModels[4].LoadModelFromFile("data\\models\\tower\\tower.obj");
+	amModels[5].LoadModelFromFile("data\\models\\plant\\plant.obj");
 	
+
 	CAssimpModel::FinalizeVBO();
 	CMultiLayeredHeightmap::LoadTerrainShaderProgram();
 	hmWorld.LoadHeightMapFromImage("data\\worlds\\world_like_in_21th.bmp");
 
 	matShiny = CMaterial(1.0f, 32.0f);
-
 	psMainParticleSystem.InitalizeParticleSystem();
-
-	psMainParticleSystem.SetGeneratorProperties(
-		glm::vec3(-10.0f, 17.5f, 0.0f), // Where the particles are generated
-		glm::vec3(-1, 20, -1), // Minimal velocity
-		glm::vec3(1, 40, 1), // Maximal velocity
-		glm::vec3(0, -10, 0), // Gravity force applied to particles
-		glm::vec3(0.0f, 0.3f, 1.0f), // Color
-		6.0f, // Minimum lifetime in seconds
-		8.0f, // Maximum lifetime in seconds
-		0.75f, // Rendered size
-		0.01f, // Spawn every 0.05 seconds
-		2); // And spawn 30 particles
 }
 
 /*-----------------------------------------------
@@ -135,6 +144,18 @@ void RenderScene(LPVOID lpParam)
 	spMain.SetUniform("matrices.normalMatrix", glm::mat4(1.0));
 	spMain.SetUniform("vColor", glm::vec4(1, 1, 1, 1));
 
+	psMainParticleSystem.SetGeneratorProperties(
+		glm::vec3(-10.0f, 17.5f, 0.0f), // Where the particles are generated
+		glm::vec3(-minHorizontalVelocity, minVerticalVelocity, -minHorizontalVelocity), // Minimal velocity
+		glm::vec3(-maxHorizontalVelocity, maxVerticalVelocity, -maxHorizontalVelocity), // Maximal velocity
+		glm::vec3(0, gravity, 0), // Gravity force applied to particles
+		glm::vec3(Red, Green, Blue), // Color
+		MinLifeTime, // Minimum lifetime in seconds
+		MaxLifeTime, // Maximum lifetime in seconds
+		RenderedSize, // Rendered size
+		SpawnPeriod, // Spawn every 0.05 seconds
+		Quantity); // And spawn 30 particles
+
 	// This values will set the darkness of whole scene, that's why such name of variable :D
 	static float fAngleOfDarkness = 45.0f;
 	// You can play with direction of light with '+' and '-' key
@@ -157,26 +178,44 @@ void RenderScene(LPVOID lpParam)
 	spMain.SetUniform("vEyePosition", cCamera.vEye);
 	matShiny.SetUniformData(&spMain, "matActive");
 	
-	// Render a house
-
 	CAssimpModel::BindModelsVAO();
 
+	// Render a house
 	glm::mat4 mModel = glm::translate(glm::mat4(1.0), glm::vec3(40.0f, 17.0f, 0));
-	mModel = glm::scale(mModel, glm::vec3(8, 8, 8));
-
+	mModel = glm::scale(mModel, glm::vec3(8.0f));
 	spMain.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
 	amModels[0].RenderModel();
-	
-	// ... and a treasure chest
 
+	// ... and a treasure chest
 	mModel = glm::translate(glm::mat4(1.0), glm::vec3(-10.0f, 17.5f, 0));
 	mModel = glm::scale(mModel, glm::vec3(0.5f, 0.5f, 0.5f));
-
 	spMain.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
 	amModels[1].RenderModel();
 
-	// Render 3 rotated tori to create interesting object
+	// EARTH
+	mModel = glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 37.5f, 100.0f));
+	mModel = glm::scale(mModel, glm::vec3(0.1f));
+	spMain.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
+	amModels[2].RenderModel();
 
+	// TREE
+	mModel = glm::translate(glm::mat4(1.0), glm::vec3(100.0f, 17.5f, 0));
+	mModel = glm::scale(mModel, glm::vec3(0.03f));
+	spMain.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
+	amModels[3].RenderModel();
+
+	// TOWER
+	mModel = glm::translate(glm::mat4(1.0), glm::vec3(130.0f, 10.0f, 40.0f));
+	mModel = glm::scale(mModel, glm::vec3(7.0f));
+	spMain.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
+	amModels[4].RenderModel();
+
+	// PLANT
+	mModel = glm::translate(glm::mat4(1.0), glm::vec3(10.0f, 17.5f, 0));
+	spMain.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
+	amModels[5].RenderModel();
+
+	// Render 3 rotated tori to create interesting object
 	tTextures[5].BindTexture();
 	glBindVertexArray(uiVAOSceneObjects);
 	static float fGlobalAngle = 0.0f;
@@ -203,7 +242,7 @@ void RenderScene(LPVOID lpParam)
 		glDrawArrays(GL_TRIANGLES, 0, iTorusFaces*3);
 	}
 
-	fGlobalAngle += appMain.sof(0.5f);
+	fGlobalAngle += appMain.sof(rotationSpeed);
 
 	// Now we're going to render terrain
 
@@ -249,7 +288,7 @@ void RenderScene(LPVOID lpParam)
 		// ... Render the house again
 
 		glm::mat4 mModel = glm::translate(glm::mat4(1.0), glm::vec3(40.0f, 17.0f, 0));
-		mModel = glm::scale(mModel, glm::vec3(8, 8, 8));
+		mModel = glm::scale(mModel, glm::vec3(8));
 
 		spNormalDisplayer.SetModelAndNormalMatrix("matrices.modelMatrix", "matrices.normalMatrix", mModel);
 		amModels[0].RenderModel(GL_POINTS);
@@ -297,7 +336,7 @@ void RenderScene(LPVOID lpParam)
 	psMainParticleSystem.UpdateParticles(appMain.sof(1.0f));
 	psMainParticleSystem.RenderParticles();
 
-	cCamera.Update(controlMode);
+	cCamera.Update();
 
 	// Print something over scene
 	
@@ -305,27 +344,146 @@ void RenderScene(LPVOID lpParam)
 	glDisable(GL_DEPTH_TEST);
 	spFont2D.SetUniform("matrices.projMatrix", oglControl->GetOrthoMatrix());
 
-	int w = oglControl->GetViewportWidth(), h = oglControl->GetViewportHeight();
-	
+	int w = oglControl->GetViewportWidth(), 
+		h = oglControl->GetViewportHeight();
 	spFont2D.SetUniform("vColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-	ftFont.Print("OpenGL_5 2017-2018", 20, 20, 24);
-
-	ftFont.PrintFormatted(20, h-30, 20, "FPS: %d", oglControl->GetFPS());
-	ftFont.PrintFormatted(20, h-80, 20, "Particles: %d", psMainParticleSystem.GetNumParticles());
-
-	ftFont.PrintFormatted(20, h-110, 20, "Specular Intensity: %.2f (Press 'Q' and 'E' to change)", matShiny.fSpecularIntensity);
-	if(Keys::Key('Q'))matShiny.fSpecularIntensity -= appMain.sof(0.2f);
-	if(Keys::Key('E'))matShiny.fSpecularIntensity += appMain.sof(0.2f);
-
-	ftFont.PrintFormatted(20, h-140, 20, "Specular Power: %.2f (Press 'Z' and 'C' to change)", matShiny.fSpecularPower);
-	if(Keys::Key('Z'))matShiny.fSpecularPower -= appMain.sof(8.0f);
-	if(Keys::Key('C'))matShiny.fSpecularPower += appMain.sof(8.0f);
-
-	ftFont.PrintFormatted(20, h-200, 20, "Displaying Normals: %s (Press 'N' to toggle)", bDisplayNormals ? "Yes" : "Nope");
-	if(Keys::Onekey('N'))bDisplayNormals = !bDisplayNormals;
+	ftFont.Print("OpenGL_4 2020 Mikhail Shubov", 20, 20, 24);
+	ftFont.PrintFormatted(20, h - 30 * 1, 20, "FPS: %d", oglControl->GetFPS());
+	ftFont.PrintFormatted(20, h - 30 * 2, 20, "Particles: %d", psMainParticleSystem.GetNumParticles());
+	ftFont.PrintFormatted(20, h - 30 * 3, 20, "ControlMode %c (Press 'Q' and 'E' to change)", controlMode);
+	ftFont.PrintFormatted(20, h - 30 * 4, 20, "0 MinVerticalVelocity: %.2f", minVerticalVelocity);
+	ftFont.PrintFormatted(20, h - 30 * 5, 20, "1 MinHorizontalVelocity: %.2f", minHorizontalVelocity);
+	ftFont.PrintFormatted(20, h - 30 * 6, 20, "2 MaxVerticalVelocity: %.2f", maxVerticalVelocity);
+	ftFont.PrintFormatted(20, h - 30 * 7, 20, "3 MaxHorizontalVelocity: %.2f", maxHorizontalVelocity);
+	ftFont.PrintFormatted(20, h - 30 * 8, 20, "4 Gravity: %.2f", gravity);
+	ftFont.PrintFormatted(20, h - 30 * 9, 20, "5 Red: %.2f", Red);
+	ftFont.PrintFormatted(20, h - 30 * 10, 20, "6 Gren: %.2f", Green);
+	ftFont.PrintFormatted(20, h - 30 * 11, 20, "7 Blue: %.2f", Blue);
+	ftFont.PrintFormatted(20, h - 30 * 12, 20, "8 MinLifeTime: %.2f", MinLifeTime);
+	ftFont.PrintFormatted(20, h - 30 * 13, 20, "9 MaxLifeTime: %.2f", MaxLifeTime);
+	ftFont.PrintFormatted(20, h - 30 * 14, 20, "Z RenderedSize: %.2f", RenderedSize);
+	ftFont.PrintFormatted(20, h - 30 * 15, 20, "X SpawnPeriod: %.2f", SpawnPeriod);
+	ftFont.PrintFormatted(20, h - 30 * 16, 20, "C Quantity: %d", Quantity);
+	ftFont.PrintFormatted(20, h - 30 * 17, 20, "V Rotation Speed: %.2f", rotationSpeed);
+	ftFont.PrintFormatted(20, h - 30 * 18, 20, "Displaying Normals: %s (Press 'N' to toggle)", bDisplayNormals ? "Yes" : "Nope");
+	
+	if (Keys::Key('0')) controlMode = '0';
+	if (Keys::Key('1')) controlMode = '1';
+	if (Keys::Key('2')) controlMode = '2';
+	if (Keys::Key('3')) controlMode = '3';
+	if (Keys::Key('4')) controlMode = '4';
+	if (Keys::Key('5')) controlMode = '5';
+	if (Keys::Key('6')) controlMode = '6';
+	if (Keys::Key('7')) controlMode = '7';
+	if (Keys::Key('8')) controlMode = '8';
+	if (Keys::Key('9')) controlMode = '9';
+	if (Keys::Key('Z')) controlMode = 'Z';
+	if (Keys::Key('X')) controlMode = 'X';
+	if (Keys::Key('C')) controlMode = 'C';
+	if (Keys::Key('V')) controlMode = 'V';
+	if (Keys::Onekey('N')) bDisplayNormals = !bDisplayNormals;
+	if (Keys::Key('Q'))
+	{
+		switch (controlMode)
+		{
+		case '0':
+			minVerticalVelocity     -= appMain.sof(10.0f);
+			break;
+		case '1':
+			minHorizontalVelocity   -= appMain.sof(5.0f);
+			break;
+		case '2':
+			maxVerticalVelocity     -= appMain.sof(10.0f);
+			break;
+		case '3':
+			maxHorizontalVelocity   -= appMain.sof(5.0f);
+			break;
+		case '4':
+			gravity                 -= appMain.sof(1.0f);
+			break;
+		case '5':
+			Red = glm::clamp(Red - appMain.sof(0.1f), 0.0f, 1.0f);
+			break;
+		case '6':
+			Green = glm::clamp(Green - appMain.sof(0.1f), 0.0f, 1.0f);
+			break;
+		case '7':
+			Blue = glm::clamp(Blue - appMain.sof(0.1f), 0.0f, 1.0f);
+			break;
+		case '8':
+			MinLifeTime             -= appMain.sof(1.0f);
+			break;
+		case '9':
+			MaxLifeTime             -= appMain.sof(1.0f);
+			break;
+		case 'Z':
+			RenderedSize            -= appMain.sof(0.05f);
+			break;
+		case 'X':
+			SpawnPeriod             -= appMain.sof(0.01f);
+			break;
+		case 'C':
+			Quantity                -= 1;
+			break;
+		case 'V':
+			rotationSpeed -= appMain.sof(0.5f);
+			break;
+		default:
+			break;
+		}
+	}
+	if (Keys::Key('E')) 
+	{
+		switch (controlMode)
+		{
+		case '0':
+			minVerticalVelocity		+= appMain.sof(10.0f);
+			break;
+		case '1':
+			minHorizontalVelocity	+= appMain.sof(5.0f);
+			break;
+		case '2':
+			maxVerticalVelocity		+= appMain.sof(10.0f);
+			break;
+		case '3':
+			maxHorizontalVelocity	+= appMain.sof(5.0f);
+			break;
+		case '4':
+			gravity					+= appMain.sof(1.0f);
+			break;
+		case '5':
+			Red						= glm::clamp(Red + appMain.sof(0.1f), 0.0f, 1.0f);
+			break;
+		case '6':
+			Green					= glm::clamp(Green + appMain.sof(0.1f), 0.0f, 1.0f);
+			break;
+		case '7':
+			Blue					= glm::clamp(Blue + appMain.sof(0.1f), 0.0f, 1.0f);
+			break;
+		case '8':
+			MinLifeTime				+= appMain.sof(1.0f);
+			break;
+		case '9':
+			MaxLifeTime				+= appMain.sof(1.0f);
+			break;
+		case 'Z':
+			RenderedSize			+= appMain.sof(0.05f);
+			break;
+		case 'X':
+			SpawnPeriod				+= appMain.sof(0.01f);
+			break;
+		case 'C':
+			Quantity				+= 1;
+			break;
+		case 'V':
+			rotationSpeed += appMain.sof(0.5f); 
+			break;
+		default:
+			break;
+		}
+	}
 	
 	//toggle mouse rotation
-	if (Keys::Onekey('X'))controlMode = !controlMode;
 	glEnable(GL_DEPTH_TEST);	
 	if (Keys::Onekey(VK_ESCAPE))PostQuitMessage(0);
 
@@ -346,7 +504,6 @@ void ReleaseScene(LPVOID lpParam)
 {
 	FOR(i, NUMTEXTURES)tTextures[i].DeleteTexture();
 	sbMainSkybox.DeleteSkybox();
-
 	spMain.DeleteProgram();
 	spOrtho2D.DeleteProgram();
 	spFont2D.DeleteProgram();
