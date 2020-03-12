@@ -1,0 +1,20 @@
+﻿  Camera.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\camera.h(5): fatal error C1083: Cannot open include file: 'math/math3d.h': No such file or directory
+  common.cpp
+  GLWindow.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.h(8): fatal error C1083: Cannot open include file: 'GL/glext.h': No such file or directory
+  Light.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\light.h(5): fatal error C1083: Cannot open include file: 'math/math3d.h': No such file or directory
+  Logger.cpp
+  main.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\main.cpp(5): fatal error C1083: Cannot open include file: 'math/math3d.h': No such file or directory
+  Material.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\material.h(5): fatal error C1083: Cannot open include file: 'math/math3d.h': No such file or directory
+  Mesh.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\mesh.h(5): fatal error C1083: Cannot open include file: 'math/math3d.h': No such file or directory
+  OpenGL.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.h(8): fatal error C1083: Cannot open include file: 'GL/glext.h': No such file or directory
+  Shader.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.h(8): fatal error C1083: Cannot open include file: 'GL/glext.h': No such file or directory
+  Texture.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.h(8): fatal error C1083: Cannot open include file: 'GL/glext.h': No such file or directory

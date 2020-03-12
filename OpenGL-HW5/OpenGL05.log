@@ -1,0 +1,10 @@
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.cpp:OpenGLPrintDebugInfo:27 DEBUG OpenGL render context information:
+  Renderer       : Intel(R) HD Graphics 515
+  Vendor         : Intel
+  Version        : 3.3.0 - Build 22.20.16.4836
+  GLSL version   : 3.30 - Build 22.20.16.4836
+  OpenGL version : 3.3
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.cpp:OpenGLPrintDebugInfo:30 DEBUG GL_MAX_VERTEX_ATTRIBS = 16
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.cpp:OpenGLPrintDebugInfo:31 DEBUG GL_MAX_VERTEX_UNIFORM_COMPONENTS = 4096
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.cpp:OpenGLPrintDebugInfo:32 DEBUG GL_MAX_TEXTURE_IMAGE_UNITS = 32
+c:\dev\computer graphics\projects\opengl\opengl-hw5\opengl.cpp:OpenGLPrintDebugInfo:33 DEBUG GL_MAX_COLOR_ATTACHMENTS = 8

@@ -11,7 +11,8 @@ bool LoadFile(const char *fileName, bool binary, uint8_t **buffer, uint32_t *siz
 
 	const char mode[] = {'r', binary ? 'b' : 't', '\0'};
 
-	if ((input = fopen(fileName, mode)) == NULL)
+	fopen_s(&input, fileName, mode);
+	if (input == NULL)
 	{
 		LOG_ERROR("Opening file '%s'\n", fileName);
 		return false;
