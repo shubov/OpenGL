@@ -18,15 +18,15 @@ uniform struct Matrices
 
 void main()
 {
-  mat4 mMVP = matrices.projMatrix*matrices.viewMatrix;
+  mat4 mVP = matrices.projMatrix*matrices.viewMatrix;
   
   vec3 vNormal = (matrices.normalMatrix*vec4(vNormalPass[0]*fNormalLength, 1.0)).xyz;
   vNormal = normalize(vNormal);
   vec3 vPos = (matrices.modelMatrix * gl_in[0].gl_Position).xyz;
-  gl_Position = mMVP*vec4(vPos, 1.0);
+  gl_Position = mVP*vec4(vPos, 1.0);
   EmitVertex();
 
-  gl_Position = mMVP*vec4(vPos+vNormal, 1.0);
+  gl_Position = mVP*vec4(vPos+vNormal, 1.0);
   EmitVertex();
 
   EndPrimitive();  

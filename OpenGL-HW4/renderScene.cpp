@@ -27,7 +27,7 @@ CDirectionalLight dlSun;
 CMaterial matShiny;
 CAssimpModel amModels[6];
 CMultiLayeredHeightmap hmWorld;
-CParticleSystemTransformFeedback psMainParticleSystem;
+CParticleSystemTransformFeedback psMainParticleSystem[2];
 int iTorusFaces;
 bool bDisplayNormals = false; // Do not display normals by default
 float rotationSpeed = 0.5f;
@@ -117,7 +117,20 @@ void InitScene(LPVOID lpParam)
 	hmWorld.LoadHeightMapFromImage("data\\worlds\\world_like_in_21th.bmp");
 
 	matShiny = CMaterial(1.0f, 32.0f);
-	psMainParticleSystem.InitalizeParticleSystem();
+	psMainParticleSystem[1].SetGeneratorProperties(
+		glm::vec3(40.0f, 17.5f, 0.0f), // Where the particles are generated
+		glm::vec3(-1, 40, -1), // Minimal velocity
+		glm::vec3(1, 60, 1), // Maximal velocity
+		glm::vec3(0, -30, 0), // Gravity force applied to particles
+		glm::vec3(0.0f, 0.3f, 1.0f), // Color
+		3.0f, // Minimum lifetime in seconds
+		4.0f, // Maximum lifetime in seconds
+		0.75f, // Rendered size
+		0.1f, // Spawn every 0.01 seconds
+		30); // And spawn 2 particles
+
+	psMainParticleSystem[0].InitalizeParticleSystem();
+	psMainParticleSystem[1].InitalizeParticleSystem();
 }
 
 /*-----------------------------------------------
@@ -149,7 +162,7 @@ void RenderScene(LPVOID lpParam)
 	spMain.SetUniform("matrices.normalMatrix", glm::mat4(1.0));
 	spMain.SetUniform("vColor", glm::vec4(1, 1, 1, 1));
 
-	psMainParticleSystem.SetGeneratorProperties(
+	psMainParticleSystem[0].SetGeneratorProperties(
 		glm::vec3(-10.0f, 17.5f, 0.0f), // Where the particles are generated
 		glm::vec3(-minHorizontalVelocity, minVerticalVelocity, -minHorizontalVelocity), // Minimal velocity
 		glm::vec3(-maxHorizontalVelocity, maxVerticalVelocity, -maxHorizontalVelocity), // Maximal velocity
@@ -336,10 +349,15 @@ void RenderScene(LPVOID lpParam)
 
 	tTextures[6].BindTexture(); 
 
-	psMainParticleSystem.SetMatrices(oglControl->GetProjectionMatrix(), cCamera.vEye, cCamera.vView, cCamera.vUp);
+	psMainParticleSystem[0].SetMatrices(oglControl->GetProjectionMatrix(), cCamera.vEye, cCamera.vView, cCamera.vUp);
 
-	psMainParticleSystem.UpdateParticles(appMain.sof(1.0f));
-	psMainParticleSystem.RenderParticles();
+	psMainParticleSystem[0].UpdateParticles(appMain.sof(1.0f));
+	psMainParticleSystem[0].RenderParticles();
+
+	psMainParticleSystem[1].SetMatrices(oglControl->GetProjectionMatrix(), cCamera.vEye, cCamera.vView, cCamera.vUp);
+						 
+	psMainParticleSystem[1].UpdateParticles(appMain.sof(1.0f));
+	psMainParticleSystem[1].RenderParticles();
 
 	cCamera.Update();
 
@@ -354,7 +372,7 @@ void RenderScene(LPVOID lpParam)
 	spFont2D.SetUniform("vColor", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	ftFont.Print("OpenGL_4 2020 Mikhail Shubov", 20, 20, 24);
 	ftFont.PrintFormatted(20, h - 30 * 1, 20, "FPS: %d", oglControl->GetFPS());
-	ftFont.PrintFormatted(20, h - 30 * 2, 20, "Particles: %d", psMainParticleSystem.GetNumParticles());
+	ftFont.PrintFormatted(20, h - 30 * 2, 20, "Particles: %d", psMainParticleSystem[0].GetNumParticles());
 	ftFont.PrintFormatted(20, h - 30 * 3, 20, "ControlMode %c (Press 'Q' and 'E' to change)", controlMode);
 	ftFont.PrintFormatted(20, h - 30 * 4, 20, "0 MinVerticalVelocity: %.2f", minVerticalVelocity);
 	ftFont.PrintFormatted(20, h - 30 * 5, 20, "1 MinHorizontalVelocity: %.2f", minHorizontalVelocity);

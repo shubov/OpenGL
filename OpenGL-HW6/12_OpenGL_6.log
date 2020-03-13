@@ -1,0 +1,18 @@
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:28 DEBUG OpenGL render context information:
+  Renderer       : Intel(R) HD Graphics 515
+  Vendor         : Intel
+  Version        : 3.3.0 - Build 22.20.16.4836
+  GLSL version   : 3.30 - Build 22.20.16.4836
+  OpenGL version : 3.3
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:31 DEBUG GL_MAX_VERTEX_ATTRIBS = 16
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:32 DEBUG GL_MAX_VERTEX_UNIFORM_COMPONENTS = 4096
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:33 DEBUG GL_MAX_TEXTURE_IMAGE_UNITS = 32
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:34 DEBUG GL_MAX_COLOR_ATTACHMENTS = 8
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:35 DEBUG GL_MIN_PROGRAM_TEXEL_OFFSET = -8
+c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:36 DEBUG GL_MAX_PROGRAM_TEXEL_OFFSET = 7
+c:\dev\computer graphics\projects\opengl\opengl-hw6\shader.cpp:ShaderStatus:55 ERROR Shader: ERROR: 1:1: '' : illegal non-ASCII character (0xef)
+ERROR: 1:1: '' : illegal non-ASCII character (0xbb)
+ERROR: 1:1: '' : illegal non-ASCII character (0xbf)
+
+
+c:\dev\computer graphics\projects\opengl\opengl-hw6\shader.cpp:ShaderProgramCreateFromFile:108 ERROR Fail to compile 'data/depth.vert'
