@@ -58,21 +58,11 @@ static Light  directionalLight;
 static Camera mainCamera, lightCamera;
 
 static GLfloat xPos = 0.5;
-static GLfloat cubesPos = 0.0;
 static GLfloat lthresh = 0.1;
 static GLfloat uthresh = 0.21;
 
 
 static int currentEffect = 0;
-
-void SetMouseUniform() {
-	LOG_DEBUG("mouse coords {%.2f,%.2f}", mainCamera.coords.x, mainCamera.coords.y);
-	GLfloat coords[] = { mainCamera.coords.x / 50, mainCamera.coords.y / 50 };
-	glUniform1fv(glGetUniformLocation(posteffectProgram, "mouse"), 2, coords);
-
-	GLfloat pos[] = { cubesPos };
-	glUniform1fv(glGetUniformLocation(posteffectProgram, "pos"), 1, pos);
-}
 
 void SetTwirlAmount() {
 	GLfloat amount[] = { (xPos - 0.5) * 10 };
@@ -80,23 +70,21 @@ void SetTwirlAmount() {
 }
 
 // пост-эффекты 
-static const uint32_t posteffectsCount = 15;
+static const uint32_t posteffectsCount = 12;
 static Posteffect posteffects[posteffectsCount] = {
-	{VK_F1, "data1/normal.frag",     0},
-	{VK_F2, "data1/grayscale.frag",  0},
-	{VK_F3, "data1/sepia.frag",      0},
-	{VK_F4, "data1/inverse.frag",    0},
-	{VK_F5, "data1/blur.frag",       0},
-	{VK_F6, "data1/emboss.frag",     0},
-	{VK_F7, "data1/aberration.frag", 0},
-	{VK_F8, "data1/myeffect.frag", 0},
-	{'1', "data1/gaussian.frag", 0},
-	{'2', "data1/sharpness.frag", 0},
-	{'3', "data1/cubes.frag", 0, SetMouseUniform},
-	{'4', "data1/sobel.frag", 0},
-	{'5', "data1/canny.frag", 0},
-	{'6', "data1/twirl.frag", 0, SetTwirlAmount},
-	//{'7', "data1/cannysobel.frag", 0},
+	{VK_F1, "data1/grayscale.frag",  0},
+	{VK_F2 , "data1/sepia.frag",      0},
+	{VK_F3 , "data1/inverse.frag",    0},
+	{VK_F4 , "data1/blur.frag",       0},
+	{VK_F5 , "data1/emboss.frag",     0},
+	{VK_F6 , "data1/aberration.frag", 0},
+	{VK_F7 , "data1/myeffect.frag", 0},
+	{VK_F8 , "data1/gaussian.frag", 0},
+	{VK_F9 , "data1/sharpness.frag", 0},
+	{VK_F10, "data1/sobel.frag", 0},
+	{VK_F11, "data1/twirl.frag", 0, SetTwirlAmount},
+    {'1', "data1/normal.frag", 0}
+	//{'2', "data1/cannysobel.frag", 0},
 };
 
 // вершины полноэкранного прямоугольника
@@ -381,7 +369,7 @@ void RenderCanny()
 	glBindFramebuffer(GL_FRAMEBUFFER, posteffectFBO2);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLuint greyscaleProgram = posteffects[1].program;
+	GLuint greyscaleProgram = posteffects[0].program;
 	ShaderProgramBind(greyscaleProgram);
 	// устанавливаем текстуру сцены в 0-й текстурный юнит
 	TextureSetup(greyscaleProgram, 0, "colorTexture", posteffectTexture);
@@ -395,7 +383,7 @@ void RenderCanny()
 	glBindFramebuffer(GL_FRAMEBUFFER, posteffectFBO);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLuint gaussianProgram = posteffects[8].program;
+	GLuint gaussianProgram = posteffects[7].program;
 	ShaderProgramBind(gaussianProgram);
 	// устанавливаем текстуру сцены в 0-й текстурный юнит
 	TextureSetup(gaussianProgram, 0, "colorTexture", posteffectTexture2);
@@ -409,12 +397,13 @@ void RenderCanny()
 	glBindFramebuffer(GL_FRAMEBUFFER, posteffectFBO2);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLuint sobelProgramm = posteffects[14].program;
+	GLuint sobelProgramm = posteffects[9].program;
 	ShaderProgramBind(sobelProgramm);
 	// устанавливаем текстуру сцены в 0-й текстурный юнит
 	TextureSetup(sobelProgramm, 0, "colorTexture", posteffectTexture);
 	TextureSetup(sobelProgramm, 2, "depthTexture", posteffectDepthTexture);
 	glUniform1fv(glGetUniformLocation(sobelProgramm, "xPos"), 1, xPosV);
+	glUniform1fv(glGetUniformLocation(sobelProgramm, "bound"), 1, lthr);
 
 	// выводим полноэкранный прямоугольник на экран
 	glBindVertexArray(fsqVAO);
@@ -440,7 +429,7 @@ void RenderCanny()
 void RenderEffects()
 {
 	GLfloat xPosV[] = { xPos };
-	if (currentEffect == 12)
+	if (currentEffect == 11)
 	{
 		RenderCanny();
 		return;
@@ -550,17 +539,11 @@ void GLWindowInput(const GLWindow &window)
 
 
 	if (InputIsKeyDown('Q') && xPos > 0)
-		if (currentEffect == 10)
-			cubesPos -= 0.2;
-		else
 			xPos -= 0.01;
 	if (InputIsKeyDown('E') && xPos < 1)
-		if (currentEffect == 10)
-			cubesPos += 0.2;
-		else
 			xPos += 0.01;
 
-	if (currentEffect == 12)
+	if (currentEffect == 11)
 	{
 		if (InputIsKeyDown('R') && lthresh > 0)
 			lthresh -= 0.01;

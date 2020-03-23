@@ -1,14 +1,12 @@
 ﻿  main.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(61): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
 c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(62): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(63): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(78): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(78): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(68): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(68): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(542): warning C4305: '-=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(544): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(549): warning C4305: '-=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(551): warning C4305: '+=': truncation from 'double' to 'GLfloat'
 c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(554): warning C4305: '-=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(556): warning C4305: '-=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(559): warning C4305: '+=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(561): warning C4305: '+=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(566): warning C4305: '-=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(568): warning C4305: '+=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(571): warning C4305: '-=': truncation from 'double' to 'GLfloat'
-c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(573): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(556): warning C4305: '+=': truncation from 'double' to 'GLfloat'
   OpenGL-HW6.vcxproj -> C:\Dev\Computer Graphics\Projects\OpenGL\Debug\OpenGL-HW6.exe

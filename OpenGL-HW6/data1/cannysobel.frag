@@ -61,8 +61,6 @@ vec3 filter1(in vec2 texcoord)
 
 void main(void)
 {
-	vec3 texel = Vert.texcoord.x < xPos ? filter1(Vert.texcoord)
-		: texture(colorTexture, Vert.texcoord).rgb;
-
+	vec3 texel = Vert.texcoord.x < xPos ? filter1(Vert.texcoord) : texture(colorTexture, Vert.texcoord).rgb;
 	color = vec4(texel, 1.0);
 }
