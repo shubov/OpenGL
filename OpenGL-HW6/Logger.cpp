@@ -8,10 +8,9 @@ void LoggerCreate(const char *fileName)
 	FILE *output;
 
 	memset(g_LoggerFileName, 0, LOGGER_FILENAME_MAX);
-	strncpy_s(g_LoggerFileName, fileName, LOGGER_FILENAME_MAX - 1);
+	strncpy(g_LoggerFileName, fileName, LOGGER_FILENAME_MAX - 1);
 
-	fopen_s(&output, g_LoggerFileName, "w");
-	if (output != NULL)
+	if ((output = fopen(g_LoggerFileName, "w")) != NULL)
 		fclose(output);
 }
 
@@ -25,8 +24,7 @@ void LoggerWrite(const char *format, ...)
 	va_list ap;
 	FILE    *output;
 
-	fopen_s(&output, g_LoggerFileName, "a+");
-	if (output == NULL)
+	if ((output = fopen(g_LoggerFileName, "a+")) == NULL)
 		return;
 
 	va_start(ap, format);

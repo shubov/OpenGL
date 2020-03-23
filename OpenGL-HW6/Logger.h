@@ -1,6 +1,6 @@
 #ifndef LOGGER_H
 #define LOGGER_H
-// вывод информации в лог-файл
+// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ
 #include <cstdio>
 #include <cstring>
 #include <cstdarg>

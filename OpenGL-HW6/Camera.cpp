@@ -3,9 +3,10 @@
 void CameraCreate(Camera &camera, float x, float y, float z)
 {
 	// зададим позицию камеры и единичную матрицу проекции
-	camera.position   = vec3(x, y, z);
-	camera.rotation   = vec3_zero;
+	camera.position = vec3(x, y, z);
+	camera.rotation = vec3_zero;
 	camera.projection = mat4_identity;
+	camera.coords = vec2(400, 300);
 }
 
 void CameraLookAt(Camera &camera, const vec3 &position, const vec3 &center, const vec3 &up)
@@ -31,6 +32,7 @@ void CameraRotate(Camera &camera, float x, float y, float z)
 {
 	// увеличение углов вращения камеры
 	camera.rotation += vec3(x, y, z);
+	camera.coords -= vec2(x, y);
 }
 
 void CameraMove(Camera &camera, float x, float y, float z)
@@ -46,16 +48,16 @@ void CameraMove(Camera &camera, float x, float y, float z)
 void CameraSetup(GLuint program, const Camera &camera, const mat4 &model)
 {
 	// расчитаем необходимые матрицы
-	mat4 view           = GLFromEuler(camera.rotation) * GLTranslation(-camera.position);
+	mat4 view = GLFromEuler(camera.rotation) * GLTranslation(-camera.position);
 	mat4 viewProjection = camera.projection * view;
-	mat3 normal         = transpose(mat3(inverse(model)));
+	mat3 normal = transpose(mat3(inverse(model)));
 
 	mat4 modelViewProjection = viewProjection * model;
 
 	// передаем матрицы в шейдерную программу как uniform структуру
-	glUniformMatrix4fv(glGetUniformLocation(program, "transform.model"),          1, GL_TRUE, model.m);
+	glUniformMatrix4fv(glGetUniformLocation(program, "transform.model"), 1, GL_TRUE, model.m);
 	glUniformMatrix4fv(glGetUniformLocation(program, "transform.viewProjection"), 1, GL_TRUE, viewProjection.m);
-	glUniformMatrix3fv(glGetUniformLocation(program, "transform.normal"),         1, GL_TRUE, normal.m);
+	glUniformMatrix3fv(glGetUniformLocation(program, "transform.normal"), 1, GL_TRUE, normal.m);
 
 	glUniformMatrix4fv(glGetUniformLocation(program, "transform.modelViewProjection"),
 		1, GL_TRUE, modelViewProjection.m);
@@ -75,7 +77,7 @@ void CameraSetupLightMatrix(GLuint program, const Camera &camera)
 	);
 
 	// расчитаем необходимые матрицы
-	mat4 view           = GLFromEuler(camera.rotation) * GLTranslation(-camera.position);
+	mat4 view = GLFromEuler(camera.rotation) * GLTranslation(-camera.position);
 	mat4 viewProjection = bias * camera.projection * view;
 
 	// передадим матрицу источника освещения в шейдерную программу

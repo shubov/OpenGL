@@ -10,9 +10,3 @@ c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugI
 c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:34 DEBUG GL_MAX_COLOR_ATTACHMENTS = 8
 c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:35 DEBUG GL_MIN_PROGRAM_TEXEL_OFFSET = -8
 c:\dev\computer graphics\projects\opengl\opengl-hw6\opengl.cpp:OpenGLPrintDebugInfo:36 DEBUG GL_MAX_PROGRAM_TEXEL_OFFSET = 7
-c:\dev\computer graphics\projects\opengl\opengl-hw6\shader.cpp:ShaderStatus:55 ERROR Shader: ERROR: 1:1: '' : illegal non-ASCII character (0xef)
-ERROR: 1:1: '' : illegal non-ASCII character (0xbb)
-ERROR: 1:1: '' : illegal non-ASCII character (0xbf)
-
-
-c:\dev\computer graphics\projects\opengl\opengl-hw6\shader.cpp:ShaderProgramCreateFromFile:108 ERROR Fail to compile 'data/depth.vert'

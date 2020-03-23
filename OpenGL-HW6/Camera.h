@@ -8,9 +8,10 @@
 
 struct Camera
 {
-	vec3 position; //позиция камеры
+	vec3 position;
 	vec3 rotation;  
-	mat4 projection; // матрица проецирования
+	mat4 projection;
+	vec2 coords = vec2(100.0, 100.0);
 };
 
 void CameraLookAt(Camera &camera, const vec3 &position, const vec3 &center, const vec3 &up);

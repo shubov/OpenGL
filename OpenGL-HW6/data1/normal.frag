@@ -1,4 +1,4 @@
-﻿// вывод изображения без обработки
+// вывод изображения без обработки
 // текстуры
 uniform sampler2D colorTexture, depthTexture;
 

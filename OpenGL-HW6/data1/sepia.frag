@@ -1,6 +1,7 @@
-﻿//F3
+//F3
 // текстуры
 uniform sampler2D colorTexture, depthTexture;
+uniform float xPos;
 
 // параметры полученные из вершинного шейдера
 in Vertex
@@ -14,7 +15,7 @@ const vec3 factor     = vec3(0.27, 0.67, 0.06);
 const vec3 darkColor  = vec3(0.2, 0.05, 0.0);
 const vec3 lightColor = vec3(1.0,  0.9, 0.5);
 
-vec3 filter(in vec2 texcoord)
+vec3 filter1(in vec2 texcoord)
 {
      return mix(darkColor, lightColor, 
             dot(factor, texture(colorTexture, texcoord).rgb));
@@ -22,7 +23,7 @@ vec3 filter(in vec2 texcoord)
 
 void main(void)
 {
-	vec3 texel = Vert.texcoord.x < 0.5 ? filter(Vert.texcoord)
+	vec3 texel = Vert.texcoord.x < xPos ? filter1(Vert.texcoord)
 		: texture(colorTexture, Vert.texcoord).rgb;
 
 	color = vec4(texel, 1.0);

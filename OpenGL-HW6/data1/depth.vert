@@ -1,4 +1,4 @@
-﻿layout(location = VERT_POSITION) in vec3 position;
+layout(location = VERT_POSITION) in vec3 position;
 
 // параметры преобразований
 uniform struct Transform

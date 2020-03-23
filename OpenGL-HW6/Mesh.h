@@ -1,6 +1,6 @@
 #ifndef MESH_H
 #define MESH_H
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3D пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+// загрузка 3D моделей
 #include "common.h"
 #include "math/math3d.h"
 #include "math/mathgl.h"

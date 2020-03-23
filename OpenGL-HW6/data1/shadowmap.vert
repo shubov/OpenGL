@@ -1,4 +1,4 @@
-﻿// вершинный шейдер
+// вершинный шейдер
 layout(location = VERT_POSITION) in vec3 position;
 layout(location = VERT_TEXCOORD) in vec2 texcoord;
 layout(location = VERT_NORMAL)   in vec3 normal;

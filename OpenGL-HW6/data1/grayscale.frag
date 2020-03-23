@@ -1,6 +1,7 @@
-﻿// F7
+// F2
 // текстуры
 uniform sampler2D colorTexture, depthTexture;
+uniform float xPos;
 
 // параметры полученные из вершинного шейдера
 in Vertex
@@ -10,18 +11,18 @@ in Vertex
 
 layout(location = FRAG_OUTPUT0) out vec4 color;
 
-vec3 filter(in vec2 texcoord)
+const vec3 factor = vec3(0.27, 0.67, 0.06);
+
+vec3 filter1(in vec2 texcoord)
 {
-	return vec3(
-		textureOffset(colorTexture, texcoord, ivec2(2,2)).r,
-		texture(colorTexture, texcoord).g,
-		textureOffset(colorTexture, texcoord, ivec2(4,4)).b
-	);
+        // скалярное произведение
+
+	return vec3(dot(factor, texture(colorTexture, texcoord).rgb));
 }
 
 void main(void)
 {
-	vec3 texel = Vert.texcoord.x < 0.5 ? filter(Vert.texcoord)
+	vec3 texel = Vert.texcoord.x <xPos ? filter1(Vert.texcoord)
 		: texture(colorTexture, Vert.texcoord).rgb;
 
 	color = vec4(texel, 1.0);

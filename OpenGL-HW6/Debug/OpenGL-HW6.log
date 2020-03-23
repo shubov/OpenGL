@@ -1,32 +1,14 @@
-﻿GLWindow.obj : error LNK2019: unresolved external symbol __imp__ChoosePixelFormat@8 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__GetDeviceCaps@8 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SetPixelFormat@12 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SwapBuffers@4 referenced in function "int __cdecl GLWindowMainLoop(void)" (?GLWindowMainLoop@@YAHXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__GetMessageA@16 referenced in function "int __cdecl GLWindowMainLoop(void)" (?GLWindowMainLoop@@YAHXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__TranslateMessage@4 referenced in function "int __cdecl GLWindowMainLoop(void)" (?GLWindowMainLoop@@YAHXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__DispatchMessageA@4 referenced in function "int __cdecl GLWindowMainLoop(void)" (?GLWindowMainLoop@@YAHXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__PeekMessageA@20 referenced in function "int __cdecl GLWindowMainLoop(void)" (?GLWindowMainLoop@@YAHXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__DefWindowProcA@16 referenced in function "long __stdcall GLWindowProc(struct HWND__ *,unsigned int,unsigned int,long)" (?GLWindowProc@@YGJPAUHWND__@@IIJ@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__PostQuitMessage@4 referenced in function "long __stdcall GLWindowProc(struct HWND__ *,unsigned int,unsigned int,long)" (?GLWindowProc@@YGJPAUHWND__@@IIJ@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__UnregisterClassA@8 referenced in function "void __cdecl GLWindowDestroy(void)" (?GLWindowDestroy@@YAXXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__RegisterClassExA@4 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__CreateWindowExA@48 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__DestroyWindow@4 referenced in function "void __cdecl GLWindowDestroy(void)" (?GLWindowDestroy@@YAXXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__ShowWindow@8 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SetWindowPos@28 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SetFocus@4 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__GetSystemMetrics@4 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__UpdateWindow@4 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SetForegroundWindow@4 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__GetDC@4 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__ReleaseDC@8 referenced in function "void __cdecl GLWindowDestroy(void)" (?GLWindowDestroy@@YAXXZ)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__GetClientRect@8 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__AdjustWindowRectEx@16 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__ShowCursor@4 referenced in function "void __cdecl InputShowCursor(bool)" (?InputShowCursor@@YAX_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SetCursorPos@8 referenced in function "void __cdecl InputSetCursorPos(int,int)" (?InputSetCursorPos@@YAXHH@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__ClientToScreen@8 referenced in function "void __cdecl InputSetCursorPos(int,int)" (?InputSetCursorPos@@YAXHH@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__SetWindowLongA@12 referenced in function "void __cdecl GLWindowSetSize(int,int,bool)" (?GLWindowSetSize@@YAXHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__LoadCursorA@8 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__LoadIconA@8 referenced in function "bool __cdecl GLWindowCreate(char const *,int,int,bool)" (?GLWindowCreate@@YA_NPBDHH_N@Z)
-GLWindow.obj : error LNK2019: unresolved external symbol __imp__ChangeDisplaySettingsA@8 referenced in function "void __cdecl GLWindowDestroy(void)" (?GLWindowDestroy@@YAXXZ)
-C:\Dev\Computer Graphics\Projects\OpenGL\Debug\OpenGL-HW6.exe : fatal error LNK1120: 31 unresolved externals
+﻿  main.cpp
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(62): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(63): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(78): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(78): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(554): warning C4305: '-=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(556): warning C4305: '-=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(559): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(561): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(566): warning C4305: '-=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(568): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(571): warning C4305: '-=': truncation from 'double' to 'GLfloat'
+c:\dev\computer graphics\projects\opengl\opengl-hw6\main.cpp(573): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+  OpenGL-HW6.vcxproj -> C:\Dev\Computer Graphics\Projects\OpenGL\Debug\OpenGL-HW6.exe
