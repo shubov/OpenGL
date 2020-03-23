@@ -78,7 +78,7 @@ static Posteffect posteffects[posteffectsCount] = {
 	{VK_F4 , "data1/blur.frag",       0},
 	{VK_F5 , "data1/emboss.frag",     0},
 	{VK_F6 , "data1/aberration.frag", 0},
-	{VK_F7 , "data1/myeffect.frag", 0},
+	{VK_F7 , "data1/filter.frag", 0},
 	{VK_F8 , "data1/gaussian.frag", 0},
 	{VK_F9 , "data1/sharpness.frag", 0},
 	{VK_F10, "data1/sobel.frag", 0},

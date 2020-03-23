@@ -1,3 +1,9 @@
+// Шубов Михаил Павлович БПИ164
+// Image Processing
+// Реализовано 5 фильтров
+// Реализован алгоритм Canny (порог меняется клавишами Y и U, значение от 0 до порога меняется клавишами R и T)
+// Q и E - перемещение вертикальной линии разделяющей оригинал и отредактированное изображение
+
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 
@@ -18,7 +24,7 @@
 	ShaderProgramCreateFromFile("data/" name ".vs", "data/" name ".fs")
 
 // индекс шейдерной программы
-static GLuint depthProgram = 0, depthProgram2 = 0, quadProgram = 0, shadowmapProgram = 0;
+static GLuint depthProgram = 0, quadProgram = 0, shadowmapProgram = 0;
 
 // индексы текстур
 static GLuint colorTexture = 0, depthTexture = 0;
@@ -58,7 +64,6 @@ bool GLWindowInit(const GLWindow &window)
 
 	// создадим и загрузим шейдерные программы
 	if ((depthProgram = LOAD_SHADER("depth")) == 0
-		|| (depthProgram2 = LOAD_SHADER("depth")) == 0
 		|| (quadProgram = LOAD_SHADER("quad")) == 0
 		|| (shadowmapProgram = LOAD_SHADER("shadowmap")) == 0)
 	{
@@ -68,8 +73,8 @@ bool GLWindowInit(const GLWindow &window)
 	// настроим направленный источник освещения
 	LightDefault(directionalLight, LT_DIRECTIONAL);
 	LightDefault(directionalLight2, LT_DIRECTIONAL);
-	directionalLight.position.set(6.0f, 6.0f, 6.0f, 0.0f);
-	directionalLight2.position.set(-6.0f, 6.0f, -6.0f, 0.0f);
+	directionalLight.position.set(20.0f, 20.0f, 20.0f, 0.0f);
+	directionalLight2.position.set(20.0f, 20.0f, -20.0f, 0.0f);
 	// загрузим текстуры
 	colorTexture = TextureCreateFromTGA("data/texture.tga");
 
@@ -154,7 +159,6 @@ bool GLWindowInit(const GLWindow &window)
 	CameraLookAt(lightCamera, directionalLight.position, -directionalLight.position, vec3_y);
 	CameraOrtho(lightCamera, -100.0f, 100.0f, -100.0f, 100.0f, -200.0f, 200.0f);
 
-	// камера источника света 2
 	CameraLookAt(lightCamera2, directionalLight2.position, -directionalLight2.position, vec3_y);
 	CameraOrtho(lightCamera2, -100.0f, 100.0f, -100.0f, 100.0f, -200.0f, 200.0f);
 
@@ -199,7 +203,6 @@ void GLWindowClear(const GLWindow &window)
 		MeshDestroy(meshes[i]);
 
 	ShaderProgramDestroy(depthProgram);
-	ShaderProgramDestroy(depthProgram2);
 	ShaderProgramDestroy(quadProgram);
 	ShaderProgramDestroy(shadowmapProgram);
 
@@ -218,8 +221,25 @@ void RenderScene(GLuint program, const Camera &camera)
 	ShaderProgramBind(program);
 
 	LightSetup(program, directionalLight);
-	LightSetup(program, directionalLight2);
 	CameraSetupLightMatrix(program, lightCamera);
+
+	TextureSetup(program, 1, "depthTexture", depthTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+
+	for (uint32_t i = 0; i < meshCount; ++i)
+	{
+		CameraSetup(program, camera, MeshGetModelMatrix(meshes[i]));
+		MaterialSetup(program, materials[i]);
+		MeshRender(meshes[i]);
+	}
+}
+
+void RenderScene2(GLuint program, const Camera &camera)
+{
+	// делаем шейдерную программу активной
+	ShaderProgramBind(program);
+
+	LightSetup(program, directionalLight2);
 	CameraSetupLightMatrix(program, lightCamera2);
 
 	TextureSetup(program, 1, "depthTexture", depthTexture);
@@ -254,8 +274,30 @@ void GLWindowRender(const GLWindow &window)
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glCullFace(GL_FRONT);
 
-	RenderScene(depthProgram, lightCamera);
-	RenderScene(depthProgram2, lightCamera2);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE,GL_ONE_MINUS_SRC_ALPHA);
+	ShaderProgramBind(depthProgram);
+	LightSetup(depthProgram, directionalLight);
+	CameraSetupLightMatrix(depthProgram, lightCamera);
+	TextureSetup(depthProgram, 1, "depthTexture", depthTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	LightSetup(depthProgram, directionalLight2);
+	CameraSetupLightMatrix(depthProgram, lightCamera2);
+	TextureSetup(depthProgram, 1, "depthTexture", depthTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	for (uint32_t i = 0; i < meshCount; ++i)
+	{
+		CameraSetup(depthProgram, lightCamera, MeshGetModelMatrix(meshes[i]));
+		MaterialSetup(depthProgram, materials[i]);
+		MeshRender(meshes[i]);
+	}
+	for (uint32_t i = 0; i < meshCount; ++i)
+	{
+		CameraSetup(depthProgram, lightCamera2, MeshGetModelMatrix(meshes[i]));
+		MaterialSetup(depthProgram, materials[i]);
+		MeshRender(meshes[i]);
+	}
+	glDisable(GL_BLEND);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, window.width, window.height);

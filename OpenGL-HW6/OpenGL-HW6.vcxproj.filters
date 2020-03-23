@@ -83,29 +83,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data1\aberration.frag" />
-    <None Include="data1\bloom.frag" />
     <None Include="data1\blur.frag" />
-    <None Include="data1\canny.frag" />
-    <None Include="data1\cannysobel.frag" />
-    <None Include="data1\centroid.frag" />
-    <None Include="data1\deferred.frag" />
     <None Include="data1\depth.frag" />
     <None Include="data1\depth.vert" />
-    <None Include="data1\edge.frag" />
     <None Include="data1\emboss.frag" />
-    <None Include="data1\gamma.frag" />
     <None Include="data1\gaussian.frag" />
     <None Include="data1\grayscale.frag" />
     <None Include="data1\inverse.frag" />
-    <None Include="data1\myeffect.frag" />
     <None Include="data1\normal.frag" />
     <None Include="data1\posteffect.vert" />
     <None Include="data1\sepia.frag" />
     <None Include="data1\shadowmap.frag" />
     <None Include="data1\shadowmap.vert" />
     <None Include="data1\sobel.frag" />
-    <None Include="data1\cubes.frag" />
     <None Include="data1\sharpness.frag" />
     <None Include="data1\twirl.frag" />
+    <None Include="data1\filter.frag" />
   </ItemGroup>
 </Project>
