@@ -1,5 +1,5 @@
 # OpenGL
-Computer Graphics Course
+### Higher School of Economics: Computer Graphics Course
 
 Libraries used:
 1) glm
